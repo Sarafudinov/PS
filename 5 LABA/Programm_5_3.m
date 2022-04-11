@@ -1,0 +1,30 @@
+% Программа P5_3
+% Демонстрация эффекта "воображения" в частотной области
+clf;
+t=0:0.05:20;
+xa=2*t.*exp(-t);
+subplot(2,2,1);
+plot(t,xa); grid;
+xlabel('Время, мсек'); ylabel('Амплитуда');
+title('Непрерывный сигнал x_{a}(t)');
+subplot(2,2,2);
+wa=0:10/511:15;
+ha=freqs(2,[1 2 1],wa);
+plot(wa/(2*pi),abs(ha)); grid;
+xlabel('Частота, кГц'); ylabel('Амплитуда');
+title('|X_{a}(j/Omega)|');
+axis([0 5/pi 0 2]);
+subplot(2,2,3);
+T=1;
+n=0:T:20;xs=2*n.*exp(-n);
+k=0:length(n)-1;
+stem(k,xs); grid;
+xlabel('Время n'); ylabel('Амплитуда');
+title('Дискретный во времени сигнал x[n]');
+subplot(2,2,4);
+wd=0:pi/250:pi;
+hd=freqz(xs,1,wd);
+plot(wd/(T*pi),T*abs(hd)); grid;
+xlabel('Частота, кГц'); ylabel('Амплитуда');
+title('|X(e^{j/omega})|');
+axis([0 1/T 0 2]);

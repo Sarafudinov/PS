@@ -1,0 +1,13 @@
+% Программа P5_4
+% Дизайн аналогового фильтра
+clf;
+Fp=2500; Fs=4500;
+Wp=2*pi*Fp; Ws=2*pi*Fs;
+[N,Wn]=buttord(Wp,Ws,0.5,30,'s');
+[b,a]=butter(N,Wn,'s');
+wa=0:(3*Ws)/511:3*Ws;
+h=freqs(b,a,wa);
+plot(wa/(2*pi),20*log10(abs(h))); grid;
+xlabel('Частота, Гц'); ylabel('Добавление');
+title('Отклик увеличения');
+axis([0 3*Fs -60 5]);
